@@ -17,6 +17,11 @@ use File::Spec::Functions qw(catfile);
 SKIP: {
 	skip "Need Business::ISBN to run this test", 2 unless eval { require Business::ISBN };
 
+	my $file = catfile( qw(blib lib Business ISBN RangeMessage.xml) );
+	my $out_of_the_way = $file . '.hidden';
+
+	rename $file => $out_of_the_way;
+
 	subtest 'compile' => sub {
 		my @modules = qw( Business::ISBN::Data );
 		foreach my $module ( @modules ) {
@@ -30,6 +35,8 @@ SKIP: {
 			ok( $i->is_valid, "$isbn is valid" );
 			}
 		};
+
+	rename $out_of_the_way => $file;
 	}
 
 done_testing();
