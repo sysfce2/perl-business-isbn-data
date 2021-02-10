@@ -15,7 +15,7 @@ use Test::More;
 use File::Spec::Functions qw(catfile);
 
 SKIP: {
-	skip "Need Business::ISBN to run this test", 2 unless eval { use_ok( 'Business::ISBN' ) };
+	skip "Need Business::ISBN to run this test", 2 unless eval { require Business::ISBN };
 
 	subtest 'compile' => sub {
 		my @modules = qw( Business::ISBN::Data );
