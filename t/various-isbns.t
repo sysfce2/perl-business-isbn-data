@@ -15,12 +15,12 @@ use Test::More;
 use File::Spec::Functions qw(catfile);
 
 SKIP: {
-	skip "Need Business::ISBN to run this test", 2 unless require_ok( 'Business::ISBN' );
+	skip "Need Business::ISBN to run this test", 2 unless eval { use_ok( 'Business::ISBN' ) };
 
 	subtest 'compile' => sub {
 		my @modules = qw( Business::ISBN::Data );
 		foreach my $module ( @modules ) {
-			BAIL_OUT( "Could not load $module" ) unless use_ok( $module );
+			BAIL_OUT( "Could not load $module" ) unless eval{ use_ok( $module ) };
 			}
 		};
 
